@@ -14,7 +14,7 @@
 
 void	free_all_2(t_cub *cub)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (cub->map_orig)

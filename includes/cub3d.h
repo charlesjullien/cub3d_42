@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include <math.h>
-# include "../mlx/mlx.h"
+# include "../libmlx/mlx.h"
 # include "../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -169,13 +169,14 @@ void	parse_dot_cub(char *map, t_cub *cub);
 void	get_elements(t_cub *cub);
 void	find_texture(t_cub *cub, char **str);
 void	get_colors(t_cub *cub, int *tab);
+void	pass_spaces(t_cub *cub, char *str, int *i);
 
 //parse_dot_cub_2.c
 void	parse_dot_cub_2(t_cub *cub);
 void	reset_map(t_cub *cub);
 
 //cub3d_utils.c
-int		mini_gnl(char *map, t_cub *cub, int *j);
+int		mini_gnl(char *map, t_cub *cub, int *j, int i);
 void	fill_from_dot_cub(t_cub *cub, char *map);
 void	malloc_dot_cub(t_cub *cub, char *map);
 
@@ -184,6 +185,7 @@ void	find_max(t_cub *cub);
 void	check_map(t_cub *cub, char *map);
 void	scan_errors(t_cub *cub, char **map);
 void	flood_fill_algo(t_cub *cub, int limit, int x, int y);
+void	check_consecutive_nl(t_cub *cub, char *str);
 
 //execution///////////////////////////////////////////////////////////
 
@@ -213,12 +215,6 @@ void	move_player_d2(t_data *data);
 void	move_player_d(t_data *data);
 void	move_player_a2(t_data *data);
 void	move_player_a(t_data *data);
-
-//move_pos_w_s.c
-void	move_player_w2(t_data *data);
-void	move_player_w(t_data *data);
-void	move_player_s2(t_data *data);
-void	move_player_s(t_data *data);
 
 //mlx_utils.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);

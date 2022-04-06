@@ -35,17 +35,17 @@ void	check_consecutive_nl(t_cub *cub, char *str)
 void	flood_fill_algo(t_cub *cub, int limit, int x, int y)
 {
 	if (x > cub->height - 1 || y > cub->width - 1 || x < 0 || y < 0
-		|| y > ft_strlen(cub->map[x]) || !cub->map[x][y]
-		|| cub->map[x][y] == ' ')
+		|| y > ft_strlen(cub->map_orig[x]) || !cub->map_orig[x][y]
+		|| cub->map_orig[x][y] == ' ')
 		ft_stop(EXIT_FAILURE, cub, "Error\nMap doesn't fit criterias.");
 	if (limit > 28000)
 		ft_stop(EXIT_FAILURE, cub, "Error\nMap must be smaller.");
-	if (cub->map[x][y] != '0')
+	if (cub->map_orig[x][y] != '0')
 		return ;
-	if (cub->map[x][y] == 'F')
+	if (cub->map_orig[x][y] == 'F')
 		return ;
-	if (cub->map[x][y] == '0')
-		cub->map[x][y] = 'F';
+	if (cub->map_orig[x][y] == '0')
+		cub->map_orig[x][y] = 'F';
 	flood_fill_algo(cub, limit + 1, x + 1, y);
 	flood_fill_algo(cub, limit + 1, x - 1, y);
 	flood_fill_algo(cub, limit + 1, x, y + 1);
@@ -69,7 +69,7 @@ void	scan_errors(t_cub *cub, char **map)
 			{
 				if (cub->sp_dir != '!')
 					ft_stop(EXIT_FAILURE, cub, "Error\nCant have spawns > 1");
-				cub->sp_dir = cub->map[i][j];
+				cub->sp_dir = cub->map_orig[i][j];
 				cub->spawnx = i;
 				cub->spawny = j;
 			}
@@ -87,10 +87,10 @@ void	find_max(t_cub *cub)
 	int	j;
 
 	i = 0;
-	while (cub->map[i])
+	while (cub->map_orig[i])
 	{
 		j = 0;
-		while (cub->map[i][j])
+		while (cub->map_orig[i][j])
 			j++;
 		if (cub->width < j)
 			cub->width = j;
@@ -106,19 +106,19 @@ void	check_map(t_cub *cub, char *map)
 
 	i = 0;
 	check_consecutive_nl(cub, map);
-	cub->map = ft_split(map, '\n');
-	if (cub->map == NULL)
+	cub->map_orig = ft_split(map, '\n');
+	if (cub->map_orig == NULL)
 		ft_stop(1, cub, "Error\nft_split failed");
 	find_max(cub);
-	scan_errors(cub, cub->map);
-	cub->map[cub->spawnx][cub->spawny] = '0';
+	scan_errors(cub, cub->map_orig);
+	cub->map_orig[cub->spawnx][cub->spawny] = '0';
 	flood_fill_algo(cub, 0, cub->spawnx, cub->spawny);
-	while (cub->map[i])
+	while (cub->map_orig[i])
 	{
 		j = 0;
-		while (cub->map[i][j])
+		while (cub->map_orig[i][j])
 		{
-			if (cub->map[i][j] == '0')
+			if (cub->map_orig[i][j] == '0')
 				flood_fill_algo(cub, 0, i, j);
 			j++;
 		}

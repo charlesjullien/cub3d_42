@@ -45,6 +45,7 @@ struct			s_cub
 	int		ceiling[3];
 	char	*dot_cub;
 	char	**map;
+	char	**map_orig;
 	char	*line;
 	char	*cub_file;
 	int		spawnx;
@@ -174,6 +175,8 @@ void	pass_spaces(t_cub *cub, char *str, int *i);
 //parse_dot_cub_2.c
 void	parse_dot_cub_2(t_cub *cub);
 void	reset_map(t_cub *cub);
+void	refill_map(t_cub *cub, int i);
+void	refill_map_2(t_cub *cub, int i, int j);
 
 //cub3d_utils.c
 int		mini_gnl(char *map, t_cub *cub, int *j, int i);

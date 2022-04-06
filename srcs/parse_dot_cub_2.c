@@ -12,19 +12,63 @@
 
 #include "../includes/cub3d.h"
 
+void	refill_map_2(t_cub *cub, int i, int j)
+{
+	while (i < cub->height)
+	{
+		j = 0;
+		while (j < cub->width)
+		{
+			cub->map[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	j = 0;
+	while (i < cub->height)
+	{
+		j = 0;
+		while (j < ft_strlen(cub->map_orig[i]))
+		{
+			if (cub->map_orig[i][j] != ' ')
+				cub->map[i][j] = cub->map_orig[i][j];
+			j++;
+		}
+		i++;
+	}
+}
+
+void	refill_map(t_cub *cub, int i)
+{
+	cub->map = malloc(sizeof(char *) * cub->height + 1);
+	if (!cub->map)
+		ft_stop(EXIT_FAILURE, cub, "Error\nMalloc failed.");
+	cub->map[cub->height] = NULL;
+	while (i < cub->height)
+	{
+		cub->map[i] = malloc(sizeof(char) * cub->width + 1);
+		if (!cub->map[i])
+			ft_stop(EXIT_FAILURE, cub, "Error\nMalloc failed.");
+		cub->map[i][cub->width] = '\0';
+		i++;
+	}
+	refill_map_2(cub, 0, 0);
+}
+
 void	reset_map(t_cub *cub)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (cub->map[i])
+	while (cub->map_orig[i])
 	{
 		j = 0;
-		while (cub->map[i][j])
+		while (cub->map_orig[i][j])
 		{
-			if (cub->map[i][j] == 'F')
-				cub->map[i][j] = '0';
+			if (cub->map_orig[i][j] == 'F')
+				cub->map_orig[i][j] = '0';
 			j++;
 		}
 		i++;

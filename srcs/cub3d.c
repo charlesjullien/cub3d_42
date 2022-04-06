@@ -64,6 +64,7 @@ void	cub_init(t_cub *cub)
 	cub->line = NULL;
 	cub->cub_file = NULL;
 	cub->map = NULL;
+	cub->map_orig = NULL;
 	cub->dot_cub = NULL;
 	cub->width = 0;
 	cub->sp_dir = '!';
@@ -78,6 +79,7 @@ int	main(int argc, char **argv)
 	cub_init(&cub);
 	parse_dot_cub(argv[1], &cub);
 	parse_dot_cub_2(&cub);
+	refill_map(&cub, 0);
 	start_game(&cub);
 	return (0);
 }

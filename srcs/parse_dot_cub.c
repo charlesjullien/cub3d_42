@@ -96,6 +96,8 @@ void	parse_dot_cub(char *map, t_cub *cub)
 	elements = 0;
 	j = 0;
 	fill_from_dot_cub(cub, map);
+	while (cub->dot_cub[j] == '\n')
+		j++;
 	while (elements < 6)
 	{
 		if (mini_gnl(&cub->dot_cub[j], cub, &j, 0) == 0 && elements < 6)

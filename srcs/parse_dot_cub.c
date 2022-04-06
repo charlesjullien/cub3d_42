@@ -14,7 +14,7 @@
 
 void	pass_spaces(t_cub *cub, char *str, int *i)
 {
-	int coma;
+	int	coma;
 
 	coma = 0;
 	while (str[*i] == ',' || str[*i] == ' ')

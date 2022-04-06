@@ -14,8 +14,8 @@
 
 void	check_consecutive_nl(t_cub *cub, char *str)
 {
-	int i;
-	int nl;
+	int	i;
+	int	nl;
 
 	i = 0;
 	nl = 0;
@@ -26,8 +26,7 @@ void	check_consecutive_nl(t_cub *cub, char *str)
 		else
 			nl = 0;
 		if (nl == 2)
-			ft_stop(EXIT_FAILURE, cub, "Error\nConsecutive newlines after .cub element description.");
-
+			ft_stop(EXIT_FAILURE, cub, "Error\nWrong description or 2 nl.");
 		i++;
 	}
 }

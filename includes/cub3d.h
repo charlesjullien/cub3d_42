@@ -164,6 +164,7 @@ struct	s_data
 void	cub_init(t_cub *cub);
 void	ft_stop(int status, t_cub *cub, char *msg);
 void	free_all(t_cub *cub, int i);
+void	free_all_2(t_cub *cub);
 
 //parse_dot_cub.c
 void	parse_dot_cub(char *map, t_cub *cub);

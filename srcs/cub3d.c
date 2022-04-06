@@ -12,6 +12,22 @@
 
 #include "../includes/cub3d.h"
 
+void	free_all_2(t_cub *cub)
+{
+	int i;
+
+	i = 0;
+	if (cub->map_orig)
+	{
+		while (i < cub->height)
+		{
+			free(cub->map_orig[i]);
+			i++;
+		}
+		free(cub->map_orig);
+	}
+}
+
 void	free_all(t_cub *cub, int i)
 {
 	if (cub)
@@ -37,6 +53,7 @@ void	free_all(t_cub *cub, int i)
 		if (cub->dot_cub)
 			free(cub->dot_cub);
 	}
+	free_all_2(cub);
 }
 
 void	ft_stop(int status, t_cub *cub, char *msg)

@@ -41,13 +41,13 @@ void	refill_map_2(t_cub *cub, int i, int j)
 
 void	refill_map(t_cub *cub, int i)
 {
-	cub->map = malloc(sizeof(char *) * cub->height + 1);
+	cub->map = malloc(sizeof(char *) * (cub->height + 1));
 	if (!cub->map)
 		ft_stop(EXIT_FAILURE, cub, "Error\nMalloc failed.");
 	cub->map[cub->height] = NULL;
 	while (i < cub->height)
 	{
-		cub->map[i] = malloc(sizeof(char) * cub->width + 1);
+		cub->map[i] = malloc(sizeof(char) * (cub->width + 1));
 		if (!cub->map[i])
 			ft_stop(EXIT_FAILURE, cub, "Error\nMalloc failed.");
 		cub->map[i][cub->width] = '\0';

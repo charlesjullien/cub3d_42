@@ -58,7 +58,7 @@ float	draw_rays_hor3d(t_data *data)
 	data->atan = -1 / tan(data->ra);
 	if (data->ra > PI)
 	{
-		data->ry = (((int)data->posy / 64) * 64) - 0.0001;
+		data->ry = (((int)data->posy / 64) * 64) - 0.001;
 		data->rx = (data->posy - data->ry) * data->atan + data->posx;
 		data->yo = -64;
 		data->xo = -data->yo * data->atan;

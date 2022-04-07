@@ -29,6 +29,9 @@ void	check_consecutive_nl(t_cub *cub, char *str)
 			ft_stop(EXIT_FAILURE, cub, "Error\nWrong description or 2 nl.");
 		i++;
 	}
+	i--;
+	if (ft_strchr("1\n", str[i]) == 0)
+		ft_stop(EXIT_FAILURE, cub, "Error\nWrong description or 2 nl.");
 }
 
 void	flood_fill_algo(t_cub *cub, int limit, int x, int y)

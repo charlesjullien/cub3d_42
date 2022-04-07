@@ -56,7 +56,7 @@ float	draw_rays_ver3d(t_data *data)
 	data->ntan = -tan(data->ra);
 	if (data->ra > P2 || data->ra < P3)
 	{
-		data->rx = (((int)data->posx / 64) * 64) - 0.0001;
+		data->rx = (((int)data->posx / 64) * 64) - 0.001;
 		data->ry = (data->posx - data->rx) * data->ntan + data->posy;
 		data->xo = -64;
 		data->yo = -data->xo * data->ntan;

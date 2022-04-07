@@ -170,7 +170,7 @@ void	free_all_2(t_cub *cub);
 void	parse_dot_cub(char *map, t_cub *cub);
 void	get_elements(t_cub *cub);
 void	find_texture(t_cub *cub, char **str);
-void	get_colors(t_cub *cub, int *tab);
+void	get_colors(t_cub *cub, int *tab, int i, int j);
 void	pass_spaces(t_cub *cub, char *str, int *i);
 
 //parse_dot_cub_2.c

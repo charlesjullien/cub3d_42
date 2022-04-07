@@ -40,10 +40,10 @@ void	put_player(t_data *data, int x, int y)
 	int		j;
 	float	k;
 
-	i = -2;
+	i = 0;
 	while (i <= 2)
 	{
-		j = -2;
+		j = 0;
 		while (j <= 2)
 		{
 			my_mlx_pixel_put(data, y + i, x + j, 0x00FFFF00);
@@ -90,7 +90,7 @@ void	draw_map_2d(t_data *data, char **map)
 	while (map[y] != NULL)
 	{
 		x = 0;
-		while (map[y][x])
+		while (map[y][x] && x < 500)
 		{
 			if (map[y][x] == '1')
 				draw_map_2d2(data, x, y, 0x00FF0000);

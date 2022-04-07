@@ -23,12 +23,12 @@ void	malloc_dot_cub(t_cub *cub, char *map)
 	buf = 1;
 	while (map[i])
 		i++;
-	if (i < 5 && (map[i - 1] != 'b' || map[i - 2] != 'u'
+	if (i < 5 || (map[i - 1] != 'b' || map[i - 2] != 'u'
 			|| map[i - 3] != 'c' || map[i - 4] != '.'))
-		ft_stop(EXIT_FAILURE, cub, "Error\nFile must be .cub type");
+		ft_stop(EXIT_FAILURE, cub, "Error\nFile must be *.cub type");
 	cub->fd = open(map, O_RDONLY);
 	if (cub->fd < 0)
-		ft_stop(EXIT_FAILURE, cub, "Error\nFailed to open .cub file");
+		ft_stop(EXIT_FAILURE, cub, "Error\nFailed to open *.cub file");
 	i = 0;
 	while (rd == 1)
 	{
@@ -62,6 +62,7 @@ void	fill_from_dot_cub(t_cub *cub, char *map)
 			i++;
 	}
 	cub->dot_cub[i] = '\0';
+	close(cub->fd);
 }
 
 int	mini_gnl(char *map, t_cub *cub, int *j, int i)

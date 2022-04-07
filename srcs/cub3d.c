@@ -17,15 +17,18 @@ void	free_all_2(t_cub *cub)
 	int	i;
 
 	i = 0;
-	if (cub->map_orig)
+	if (cub->map_orig != NULL)
 	{
 		while (i < cub->height)
 		{
-			free(cub->map_orig[i]);
+			if (cub->map_orig[i])
+				free(cub->map_orig[i]);
 			i++;
 		}
 		free(cub->map_orig);
 	}
+	if (cub->fd >= 0)
+		close(cub->fd);
 }
 
 void	free_all(t_cub *cub, int i)
@@ -92,7 +95,10 @@ int	main(int argc, char **argv)
 	t_cub	cub;
 
 	if (argc != 2)
-		ft_stop(EXIT_FAILURE, NULL, "Error\nInvalid number of arguments");
+	{
+		printf("Error\nInvalid number of arguments\n");
+		exit(1);
+	}
 	cub_init(&cub);
 	parse_dot_cub(argv[1], &cub);
 	parse_dot_cub_2(&cub);

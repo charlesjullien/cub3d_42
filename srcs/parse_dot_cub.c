@@ -27,15 +27,12 @@ void	pass_spaces(t_cub *cub, char *str, int *i)
 		ft_stop(EXIT_FAILURE, cub, "Error\nIssue in C or F RGB infos.");
 }
 
-void	get_colors(t_cub *cub, int *tab)
+void	get_colors(t_cub *cub, int *tab, int i, int j)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
 	while (ft_isalpha(cub->line[i]))
 		i++;
+	if (i != 1)
+		ft_stop(EXIT_FAILURE, cub, "Error\nIssue in C or F RGB infos.");
 	while (cub->line[i] == ' ')
 		i++;
 	while (j < 3)
@@ -61,12 +58,12 @@ void	find_texture(t_cub *cub, char **str)
 	int	i;
 
 	i = 0;
-	while (ft_isalpha(cub->line[i]))
+	while (ft_isalpha(cub->line[i]) && i < 2)
 		i++;
 	while (cub->line[i] == ' ')
 		i++;
 	*str = ft_strdup(&cub->line[i]);
-	if (i < 3 || i == 0 || !*str)
+	if (i < 2 || i == 0 || !*str)
 		ft_stop(EXIT_FAILURE, cub, "Error\nIssue in textures infos");
 }
 
@@ -80,10 +77,10 @@ void	get_elements(t_cub *cub)
 		find_texture(cub, &cub->west);
 	else if (ft_strnstr(cub->line, "EA", 2) && !cub->east)
 		find_texture(cub, &cub->east);
-	else if (ft_strnstr(cub->line, "F ", 2) && cub->floor[0] == -1)
-		get_colors(cub, cub->floor);
-	else if (ft_strnstr(cub->line, "C ", 2) && cub->ceiling[0] == -1)
-		get_colors(cub, cub->ceiling);
+	else if (ft_strnstr(cub->line, "F", 1) && cub->floor[0] == -1)
+		get_colors(cub, cub->floor, 0, 0);
+	else if (ft_strnstr(cub->line, "C", 1) && cub->ceiling[0] == -1)
+		get_colors(cub, cub->ceiling, 0, 0);
 	else
 		ft_stop(EXIT_FAILURE, cub, "Error\nWrong elements orga in .cub");
 }
@@ -96,6 +93,8 @@ void	parse_dot_cub(char *map, t_cub *cub)
 	elements = 0;
 	j = 0;
 	fill_from_dot_cub(cub, map);
+	while (cub->dot_cub[j] == '\n')
+		j++;
 	while (elements < 6)
 	{
 		if (mini_gnl(&cub->dot_cub[j], cub, &j, 0) == 0 && elements < 6)
